@@ -62,7 +62,8 @@ while (true) {
     for (let i = 0; i <= threadCount; i++) {
         requestActions.push(() => worker.run({
             email: fakeEmail(),
-            password: fakePassword()
+            password: fakePassword(),
+            index: i
         }))
     }
 
@@ -73,7 +74,7 @@ while (true) {
 
     //Parse requests
     for (const req of requests) {
-        if (req.error) console.log(`[Error]  ||  Email=${req?.email}  ||  Password=${req?.password}`)
-        else console.log(`Email=${req?.email}  ||  Password=${req?.password}`)
+        if (req.error) console.log(`[Error]  ||  ${req.response || `Email=${req?.email}  ||  Password=${req?.password}`}`)
+        else console.log(req.response || `Email=${req?.email}  ||  Password=${req?.password}`)
     }
 }
